@@ -20,7 +20,7 @@ app.get("/getAllProducts", function(request, response){
         if(err) throw err;
         con.query("SELECT * FROM Produit", function(err, result, fields){
             if(err) throw err;
-            console.log(JSON.stringify(result));
+            // console.log(JSON.stringify(result));
             response.status(200).json(result);
         });
     }); 
