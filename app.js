@@ -75,8 +75,8 @@ app.post("/createProduct", function(request, response){
         con.query("INSERT INTO Produit values(null, '" + produit.description +" ',' " + produit.image+
         " ', " + produit.prix + " ,' " + produit.details + " '); ", function (err, result, fields)
         {
-            if(err) throw err; 
-            response.status(200).send("Produit ajouté");
+            if(err) throw err;  
+            response.status(200).json({ message: "Produit ajouté" });
         });
     }); 
 });
@@ -99,8 +99,8 @@ app.put("/updateProduct/:id", function(request, response) {
             "', prix = '" + produit.prix +
             "', details = '" + produit.details + 
             "' WHERE id = " + id, function(err, result, fields) {
-            if (err) throw err;
-            response.status(200).send("Produit modifié");
+            if (err) throw err; 
+            response.status(200).json({ message: "Produit modifié" });
         });
     });
 });
@@ -119,8 +119,8 @@ app.delete("/deleteProduct/:id", function(request, response){
     con.connect(function(err){
         if(err) throw err;
         con.query("DELETE FROM Produit where id = "+ id, function(err, result, fields){ 
-            if(err) throw err;  
-            response.status(200).send( "Produit supprimé"); 
+            if(err) throw err; 
+            response.status(200).json({ message: "Produit supprimé" }); 
         });
     }); 
 });
