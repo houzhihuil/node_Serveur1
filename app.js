@@ -7,21 +7,21 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.listen(3000);
-
-
-/* const con= mysql.createConnection({
-    host:"localhost",
-    user:"root",
-    password:"",
+ 
+// gentle-app-357002:us-central1:cloud-sql-loves-mysql
+  const con= mysql.createConnection({
+    host:"35.232.31.0",
+    user:"cloud-sql-loves-mysql",
+    password:"]<>ABoH}8OEi/Y=o",
     database:"gestionProduit"
-}); */
-Server: mysql-philippehou.alwaysdata.net
-const con= mysql.createConnection({
+});  
+ 
+/* const con= mysql.createConnection({
     host:"mysql-philippehou.alwaysdata.net",
     user:"289337_root",
     password:"Tm3x-dCQ7k3mLMf",
     database:"philippehou_gestionProduit"
-});
+}); */
 con.connect(function(err){
     if(err) throw err; 
 }); 
