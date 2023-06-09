@@ -8,11 +8,19 @@ app.use(cors());
 app.use(bodyParser.json());
 app.listen(3000);
 
-const con= mysql.createConnection({
+
+/* const con= mysql.createConnection({
     host:"localhost",
     user:"root",
     password:"",
     database:"gestionProduit"
+}); */
+Server: mysql-philippehou.alwaysdata.net
+const con= mysql.createConnection({
+    host:"mysql-philippehou.alwaysdata.net",
+    user:"289337_root",
+    password:"Tm3x-dCQ7k3mLMf",
+    database:"philippehou_gestionProduit"
 });
 con.connect(function(err){
     if(err) throw err; 
