@@ -7,7 +7,13 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.listen(3000);
- 
+
+const con= mysql.createConnection({
+    host:"localhost",
+    user:"root",
+    password:"",
+    database:"gestionProduit"
+});
 // gentle-app-357002:us-central1:cloud-sql-loves-mysql
 /*   const con= mysql.createConnection({
     host:"35.232.31.0",
@@ -17,12 +23,12 @@ app.listen(3000);
 }); */
 
 
-const con= mysql.createConnection({
+/* const con= mysql.createConnection({
     host:"sql204.byethost13.com",
     user:"b13_33393727",
     password:"ACu23Qa45gX29Te",
     database:"b13_33393727_gestionProduit"
-});
+}); */
 
 /* const con= mysql.createConnection({
     host:"mysql-philippehou.alwaysdata.net",
