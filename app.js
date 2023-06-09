@@ -9,13 +9,21 @@ app.use(bodyParser.json());
 app.listen(3000);
  
 // gentle-app-357002:us-central1:cloud-sql-loves-mysql
-  const con= mysql.createConnection({
+/*   const con= mysql.createConnection({
     host:"35.232.31.0",
     user:"cloud-sql-loves-mysql",
     password:"]<>ABoH}8OEi/Y=o",
     database:"gestionProduit"
-});  
- 
+}); */
+
+
+const con= mysql.createConnection({
+    host:"sql204.byethost13.com",
+    user:"b13_33393727",
+    password:"ACu23Qa45gX29Te",
+    database:"b13_33393727_gestionProduit"
+});
+
 /* const con= mysql.createConnection({
     host:"mysql-philippehou.alwaysdata.net",
     user:"289337_root",
