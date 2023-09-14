@@ -30,21 +30,20 @@ app.use((req, res, next) => {
         res.status(401).json({ error: 'Invalid API token' });
     }
 }); 
-       
-
+     
 /* const con= mysql.createConnection({ 
     host:"localhost",
     user: "root",
     password: "Zh9$*@92If84", 
-    database:"gestionproduit"
+    database:"sakila"
   }); */
 
-    const con= mysql.createConnection({
+  const con= mysql.createConnection({
     host:"mysql-philippehou.alwaysdata.net",
     user:"289337_root",
     password:"Tm3x-dCQ7k3mLMf",
     database:"philippehou_gestionproduit"
-});   
+});  
  
 con.connect(function(err){
     if(err) throw err; 
@@ -122,19 +121,19 @@ app.delete("/deleteActor/:actor_id", function(req, res){
         res.status(200).json({ message: "Actor supprimé" }); 
     });  
 });
-// database: philippehou_gestionproduit
+// tbl: address
 
-app.get("/getAllProducts", function(request, response){
-    con.query("SELECT * FROM produit", function(err, result, fields){
+app.get("/getAllAddress", function(request, response){
+    con.query("SELECT * FROM address", function(err, result, fields){
         if(err) throw err; 
         response.status(200).json(result);
     }); 
 }); 
 
-app.get("/getProduct/:id", function(req, res) { 
-    const id = req.params.id;
+app.get("/getAddress/:address_id", function(req, res) { 
+    const id = req.params.address_id;
 
-    const query = "SELECT * FROM produit WHERE id = ?;";
+    const query = "SELECT * FROM address WHERE address_id = ?;";
     const values = [id];
 
     con.query(query, values, function(err, result, fields) {
@@ -142,11 +141,11 @@ app.get("/getProduct/:id", function(req, res) {
         if (result.length > 0) {
             console.log(JSON.stringify(result[0]));
             res.status(200).json({
-                message: "Product trouvé",
+                message: "Address trouvé",
                 data: result[0]
             });
         } else {
-            console.log("Product non trouvé");
+            console.log("Address non trouvé");
             res.status(404).json({
                 message: "Aucun acteur trouvé",
                 data: {}
@@ -155,38 +154,46 @@ app.get("/getProduct/:id", function(req, res) {
     });
 });
 
-app.post('/addProduct', (req, res) => {
-    const produit = {
-        description: req.body.description,
-        image: req.body.image,
-        prix: req.body.prix, 
-        details: req.body.details 
-    }; 
+app.post('/addAddress', (req, res) => {
+    const address = {
+        address: req.body.address,
+        address2: req.body.address2,
+        district: req.body.district,
+        city_id: req.body.city_id,
+        postal_code: req.body.postal_code,
+        phone: req.body.phone
+       /*  x: req.body.x, // Provide x coordinate
+        y: req.body.y  // Provide y coordinate */
+    };
+
+    
      
-    const query = "INSERT INTO produit (description, image, prix, details) VALUES (?, ?, ?, ?);";
-    const values = [produit.description, produit.image, produit.prix, produit.details];
+    const query = "INSERT INTO address (address, address2, district, city_id, postal_code, phone, location) VALUES (?, ?, ?, ?, ?, ? ,?);";
+    const values = [address.address, address.address2, address.district, address.city_id, address.postal_code, address.phone, null ];
 
     con.query(query, values, (err, result, fields) => {
         if (err) {
-            console.error("Error adding product:", err); 
-            return res.status(500).json({ message: "An error occurred while adding the product." });
+            console.error("Error adding address:", err);
+            return res.status(500).json({ message: "An error occurred while adding the address." });
         }
-        res.status(200).json({ message: "Product ajouté" });
+        res.status(200).json({ message: "Address ajouté" });
     });
 });
 
-app.put("/updateProduct/:id", function(req, res) { 
-    const id= req.params.id; 
-    const produit = {
-        description: req.body.description,
-        image: req.body.image,
-        prix: req.body.prix, 
-        details: req.body.details 
-    }; 
+app.put("/updateAddress/:address_id", function(req, res) { 
+    const id= req.params.address_id; 
+    const address = {
+        address: req.body.address,
+        address2: req.body.address2,
+        district: req.body.district,
+        city_id: req.body.city_id,
+        postal_code: req.body.postal_code,
+        phone: req.body.phone
+    };
      
-    const query = "UPDATE produit SET description = ?, image = ?, prix = ?, details = ?  WHERE id = ?;";
+    const query = "UPDATE Address SET address = ?, address2 = ?, district = ?, city_id = ?, postal_code = ?, phone = ?  WHERE address_id = ?;";
      
-    const values = [produit.description, produit.image, produit.prix, produit.details, id];
+    const values = [address.address, address.address2, address.district, address.city_id, address.postal_code, address.phone];
 
     con.query(query, values, (err, result, fields) => {
         if (err) throw err;
@@ -194,13 +201,13 @@ app.put("/updateProduct/:id", function(req, res) {
     }); 
 });
  
-app.delete("/deleteProduct/:id", function(req, res){
-    const id = req.params.id;  
-    query = "DELETE FROM Produit where id = ?";
+app.delete("/deleteAddress/:address_id", function(req, res){
+    const id = req.params.address_id;  
+    query = "DELETE FROM Address where address_id = ?";
     const values = [id];
     con.query(query, values, (err, result, fields) => { 
         if(err) throw err; 
-        res.status(200).json({ message: "Produit supprimé" }); 
+        res.status(200).json({ message: "Address supprimé" }); 
     });  
 });
 
